@@ -8,7 +8,6 @@ This project implements a basic **Rate Limiter** in Go, using the `golang.org/x/
 - [Usage](#usage)
 - [Rate Limiter Behavior](#rate-limiter-behavior)
 - [Testing](#testing)
-- [License](#license)
 
 ## Installation
 
@@ -69,3 +68,11 @@ This project implements a basic **Rate Limiter** in Go, using the `golang.org/x/
       "body": "Reached API Limits, try again later."
     }
     ```
+
+
+## Testing
+
+You can run tests for the application by using the following command:
+
+```bash
+go test
