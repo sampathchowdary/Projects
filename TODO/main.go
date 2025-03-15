@@ -7,9 +7,11 @@ import (
 
 func main() {
 	// Connect to db
-	// initDB()
+	initDB()
 
 	http.HandleFunc("/tasks", getTasksHandler)
+	http.HandleFunc("/task", getTaskHandler)
+	http.HandleFunc("/task/status", updateTasksStatusHandler)
 
 	fmt.Println(" TODO App -- Using Golang ")
 	port := ":8083"

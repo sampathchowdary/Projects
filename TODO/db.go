@@ -10,7 +10,7 @@ var DB *sql.DB
 func initDB() {
 	// connect to db
 	var err error
-	dbFilePath := "./tasks.db"
+	dbFilePath := "./tasks.db" // use your own db path
 	DB, err = sql.Open("sqlite3", dbFilePath)
 	if err != nil {
 		log.Fatal("Error opening database connection: ", err)

@@ -28,3 +28,35 @@ func getTasksHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	sendSuccessResponse(w, 200, tasks)
 }
+
+func getTaskHandler(w http.ResponseWriter, r *http.Request) {
+	var task Task
+	if err := json.NewDecoder(r.Body).Decode(&task); err != nil {
+		sendErrorResponse(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err := createTask(task.Title, task.Notes, task.DueDate); err != nil {
+		sendErrorResponse(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	sendSuccessResponse(w, 200, "Task created successfully")
+}
+
+func updateTasksStatusHandler(w http.ResponseWriter, r *http.Request) {
+	var request struct {
+		ID        int  `json:"id"`
+		Completed bool `json:"completed"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		sendErrorResponse(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	if err := updateTaskStatus(request.ID, request.Completed); err != nil {
+		sendErrorResponse(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	sendSuccessResponse(w, 200, "Task status updated successfully")
+}
